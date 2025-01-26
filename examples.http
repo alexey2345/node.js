@@ -1,0 +1,187 @@
+@local=http://localhost:3002
+#admin token
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhmZGZjMmIxYjRiNmQ3ZjM2NDEwNmIiLCJiaXoiOnRydWUsImlzQWRtaW4iOnRydWUsImlhdCI6MTczNzgxODMyNH0.o8qrx_rvunSl91uIMboxB_iDsaFTGoRZ47Ai1FMcD1c
+
+#register
+POST {{local}}/api/users/
+Content-Type: application/json
+
+{
+  "name": {
+    "first": "John",
+    "middle": "Muyu",
+    "last": "Doe"
+  },
+  "phone": "1234567890",
+  "email": "john.doerr@aleeex.com",
+  "password": "securePassword1",
+  "image": {
+    "URL": "http://example.com/image.jpg",
+    "alt": "Profile Picture"
+  },
+  "address": {
+    "state": "California",
+    "country": "USA",
+    "city": "Los Angeles",
+    "street": "Main St",
+    "houseNumber": 123,
+    "zip": 90001
+  },
+  "biz": true,
+  "isAdmin": false
+
+}
+
+
+
+#login
+###
+POST {{local}}/api/auth/
+Content-Type: application/json
+
+{
+    "email": "alex@gmal.com",
+    "password": "securePassword1"  
+}
+
+#my data
+###
+GET {{local}}/api/users/me
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzhmZGZjMmIxYjRiNmQ3ZjM2NDEwNmIiLCJiaXoiOnRydWUsImlzQWRtaW4iOnRydWUsImlhdCI6MTczNzQ5NjgwOH0.DfQHdAjyWZmbKlSmzPvGhBy2aIFHVJIIfWFUSrtrJ3o
+
+
+#create card
+###
+POST {{local}}/api/cards/
+x-auth-token: {{token}}
+Content-Type: application/json
+
+{
+  "title": "Card Title",
+  "subtitle": "Card Subtitle",
+  "description": "Card Description",
+    "phone" : "0545646464",
+    "email" : "alexelxel@gmail.com",
+    "web" : "http://example.com",
+    "image" : {
+        "URL" : "http://example.com/image.jpg",
+        "alt" : "Profile Picture"
+    },
+    "address" : {
+      "state": "California",
+      "country": "USA",
+        "city" : "Tel Aviv",
+        "street" : "Rothschild",
+        "houseNumber" : 12,
+        "zip" : 12345
+    }
+}
+
+#edit user
+###
+PUT {{local}}/api/users/6790051470b402caefc1bd8a
+x-auth-token: {{token}}
+Content-Type: application/json
+
+{
+  "name": {
+    "first": "Alex",
+    "middle": "Muyu",
+    "last": "Doe"
+  },
+    "phone" : "0545645654",
+    "email" : "alex@gmal.com",
+    "image" : {
+        "URL" : "http://example.com/ige.jpg",
+        "alt" : "Profile Picre"
+    },
+    "address" : {
+      "state": "Califoria",
+      "country": "UA",
+        "city" : "Tel Aiv",
+        "street" : "Rothscild",
+        "houseNumber" : 12,
+        "zip" : 1234534
+    }
+}
+
+#delete user after users enter user id
+###
+DELETE  {{local}}/api/admin/users/678d64fd06da03abeb2e9607
+x-auth-token: {{token}}
+Content-Type: application/json
+
+#delete card after cards enter card id
+###
+DELETE  {{local}}/api/admin/cards/
+678c2f819efdf93ed032cd5c
+x-auth-token: {{token}}
+Content-Type: application/json
+
+#get all users
+###
+GET {{local}}/api/admin/users
+x-auth-token: {{token}}
+Content-Type: application/json
+
+#get user by id for admin
+###
+GET {{local}}/api/admin/users/678fdfc2b1b4b6d7f364106b
+x-auth-token: {{token}}
+Content-Type: application/json
+
+#change user business status
+###
+PATCH  {{local}}/api/users/me/business
+x-auth-token: {{token}}
+Content-Type: application/json
+
+###get all cards
+GET {{local}}/api/cards
+x-auth-token: {{token}}
+Content-Type: application/json
+
+
+#get all my cards
+###
+GET {{local}}/api/cards/my-cards
+x-auth-token: {{token}}
+Content-Type: application/json
+
+#get card by id
+###
+GET {{local}}/api/cards/my-cards/679500e3ba3d3363c7b11146
+x-auth-token: {{token}}
+Content-Type: application/json
+
+#edit card
+###
+PATCH {{local}}/api/cards/my-cards/679500e3ba3d3363c7b11146
+x-auth-token: {{token}}
+Content-Type: application/json
+
+{
+  "title": "BOOM bam",
+    "subtitle": "Card ",
+  "description": "Card ",
+  "phone": "0545646464",
+  "email": "alexelxel@gmail.com",
+  "web": "http://example.com"
+    }
+
+
+    #like card
+###
+PATCH {{local}}/api/cards/like/679500e3ba3d3363c7b11146
+x-auth-token: {{token}}
+Content-Type: application/json
+
+#edit biz number
+###
+PATCH {{local}}/api/cards/bizNumber/678ff369c05de931720d04b9
+x-auth-token: {{token}}
+Content-Type: application/json
+
+{
+  "bizNumber": "123456789"
+}
