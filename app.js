@@ -20,7 +20,7 @@ app.use("/api/admin", adminRoutes);
 connect();
 async function connect() {
   try {
-    await mongoose.connect("mongodb://127.0.0.1/ree");
+    await mongoose.connect("mongodb+srv://user:user@cluster0.vwbjx.mongodb.net/db?retryWrites=true&w=majority&appName=Cluster0");
     console.log("connect to db");
     app.listen(PORT, () => console.log(`listening to port ${PORT}`));
   } catch (e) {
