@@ -1,5 +1,4 @@
-
-
+explanation of what the project contains 
 
 .env: Likely contains environment variables for the project, such as database connection strings, API keys, or configuration settings.
 
