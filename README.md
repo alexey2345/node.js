@@ -21,19 +21,21 @@ middleware/auth.js: Middleware for authentication, possibly validating tokens or
 
 model/cards.js: A model for cards, likely defining the schema and methods for handling card-related data.
 
-registered users
+this is a project for my university not a real database that show my capabilities in node.js
 
-    "email": "alex@gmal.com",
-    "password": "securePassword1",
-    "biz": true,
-    "isAdmin": true,
-  
-    "email": "john.doe@alx.com",
-    "password": "securePassword1",
-    "biz": true,
-    "isAdmin": false,
+connection string:"mongodb+srv://user:user@cluster0.vwbjx.mongodb.net/db?retryWrites=true&w=majority&appName=Cluster0"
 
-    "email": "john.doe@aleeex.com",
-    "password": "securePassword1",
-    "biz": true,
-    "isAdmin": false,
+atlas database
+name:user
+password:user
+
+registred users
+
+user:john.doerr@aleeex.com
+password:securePassword1
+
+user:admin@admin.com
+password:securePassword1
+
+user:not@business.com
+password:securePassword1
