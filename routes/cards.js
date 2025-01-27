@@ -115,13 +115,17 @@ router.patch("/like/:id", authMW, async (req, res) => {
     }
 
     // Check if the user has already liked the card
-    if (card.likes.includes(req.user._id)) {
-      return res.status(400).send("You have already liked this card.");
+    const userIndex = card.likes.indexOf(req.user._id);
+    if (userIndex !== -1) {
+      // User has already liked the card, so remove the like
+      card.likes.splice(userIndex, 1);
+    } else {
+      // User has not liked the card, so add the like
+      card.likes.push(req.user._id);
     }
 
-    // Add the user's ID to the likes array and increment the like count
-    card.likes.push(req.user._id); // Add the user's ID to the likes array
-    card.likeCount = card.likes.length; // Update the like count based on the array length
+    // Update the like count based on the array length
+    card.likeCount = card.likes.length;
 
     // Save the updated card
     await card.save();
@@ -129,8 +133,8 @@ router.patch("/like/:id", authMW, async (req, res) => {
     // Respond with the updated card
     res.status(200).json(card);
   } catch (err) {
-    console.error("Error liking the card:", err);
-    res.status(500).send("Error liking the card.");
+    console.error("Error toggling the like status:", err);
+    res.status(500).send("Error toggling the like status.");
   }
 });
 
